@@ -2,7 +2,25 @@ var express = require('express');
 var app = express();
 var cors = require('cors')
 var bodyParser = require('body-parser')
-const routes = require('./routes/routes')
+const routes = require('./routes/routes');
+const mongoose = require('mongoose');
+
+
+
+
+
+// database connect
+
+try{
+    mongoose.connect('mongodb://localhost:27017/fashionhubDB',(err,res)=>{
+        if(err){
+            console.log("Mongo db not connected")
+        }
+        console.log("DB Connected")
+    })
+}catch(err){
+   
+}
 
 
 
