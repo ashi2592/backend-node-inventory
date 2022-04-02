@@ -4,6 +4,7 @@ const Schema =  mongoose.Schema;
 
 var schema = new Schema({
     productName: { type: String, required: true },
+    productCode:{type: String, required: true},
     status: { type: Boolean, default: false},
     productBrand: { type: mongoose.Schema.Types.ObjectId },
     productColor: { type: mongoose.Schema.Types.ObjectId },

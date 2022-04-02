@@ -9,6 +9,7 @@ const brands = require('./brands');
 const suppliers = require('./suppliers');
 const customers = require('./customers');
 const others = require('./others');
+const transcation =  require('./transcation')
 
 
 router.get('/', function (req, res, next) {
@@ -25,7 +26,7 @@ router.use('/supplier', suppliers);
 router.use('/customer', customers);
 router.use('/product', products);
 router.use('/other', others);
-
+router.use('/transcation',transcation)
 
 
 

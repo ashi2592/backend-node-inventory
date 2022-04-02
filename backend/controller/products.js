@@ -14,6 +14,16 @@ const getProducts = async (req, res, next) => {
     }
 }
 
+const searchProduct = async (req, res, next) => {
+    try {
+        const { searchText } = req.query;
+        const existingdata = await productModel.find({ "$or": [{ productCode: { '$regex': searchText } }, { productName: { '$regex': searchText } }] }).limit(10)
+        res.status(200).json(existingdata)
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
 
 const getProduct = async (req, res, next) => {
     try {
@@ -82,10 +92,30 @@ const deleteProduct = async (req, res, next) => {
 
 }
 
+
+const getProductAvailiabity = async (req, res, next) => {
+    try {
+        const { ids } = req.query;
+        const productIds = ids.split(',');
+        const productsInfo = await productModel.find(
+            { _id: { '$in': productIds } },
+            { productQty: 1, _id: 1 },
+        );
+        res.status(200).json({ availability: productsInfo })
+
+
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
+
 module.exports = {
     getProducts,
     getProduct,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    searchProduct,
+    getProductAvailiabity
 }

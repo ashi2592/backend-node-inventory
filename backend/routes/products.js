@@ -11,6 +11,9 @@ const controller = require('../controller/products')
 routes.post('/', controller.addProduct)
 
 
+routes.get('/search', controller.searchProduct)
+
+routes.get('/availiablity', controller.getProductAvailiabity);
 
 /**
  * Updata data by using Id
@@ -39,6 +42,7 @@ routes.get('/:id', controller.getProduct)
  */
 
 routes.delete('/:id', controller.deleteProduct)
+
 
 
 

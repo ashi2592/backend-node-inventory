@@ -17,7 +17,7 @@ const getCustomers = async (req, res, next) => {
 
 const getCustomer = async (req, res, next) => {
     try {
-        const { id } = req.query;
+        const { id } = req.params;
         const existingdata = await customerModel.findById(id)
         res.status(200).json(existingdata)
     }
@@ -29,10 +29,12 @@ const getCustomer = async (req, res, next) => {
 const addCustomer = async (req, res, next) => {
     try {
         const reqBody = req.body;
+        console.log(req.body)
         const value = await util.ValidateData(ValidationSchema.customerSchema, reqBody);
         if (value) {
             let customerModelObj = new customerModel();
-            customerModelObj.CustomerName = reqBody.CustomerName;
+            customerModelObj.customerName = reqBody.customerName|| 'Guest User';
+            customerModelObj.mobile = reqBody.mobile;
             customerModelObj.status = reqBody.status;
             await customerModelObj.save()
             res.status(200).json(customerModelObj)

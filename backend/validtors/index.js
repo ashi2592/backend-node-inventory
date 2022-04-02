@@ -36,7 +36,9 @@ const sizeSchema = Joi.object({
 
 
 const productSchema = Joi.object({
+    _id:commonValidator.TextSchema(),
     productName: commonValidator.TextSchemaWithRequired(),
+    productCode: commonValidator.TextSchemaWithRequired(),
     productCategory: commonValidator.TextSchemaWithRequired(),
     status: commonValidator.booleanSchema(),
     productBrand: commonValidator.TextSchemaWithRequired(),
@@ -54,7 +56,7 @@ const productSchema = Joi.object({
 
 const customerSchema = Joi.object({
     customerName: commonValidator.TextSchema(),
-    mobileNo: commonValidator.NumberSchemaWithRequired(),
+    mobile: commonValidator.TextSchemaWithRequired(1,3000),
     status: commonValidator.booleanSchema()
 })
 
@@ -64,6 +66,50 @@ const otherSchema = Joi.object({
     value: commonValidator.TextSchema(),
     status: commonValidator.booleanSchema()
 })
+
+
+
+const transcationSchema = Joi.object({
+    _id:commonValidator.TextSchema(),
+    totalVal: commonValidator.NumberSchemaWithRequired(),
+    totalQty: commonValidator.NumberSchemaWithRequired(),
+    totalMrp: commonValidator.NumberSchemaWithRequired(),
+    totalPrice: commonValidator.NumberSchemaWithRequired(),
+    discount: commonValidator.NumberSchema(),
+    store: commonValidator.TextSchemaWithRequired(),
+    season: commonValidator.TextSchemaWithRequired(),
+    products: Joi.array().items(
+        Joi.object({
+            productId: commonValidator.TextSchema(),
+            productName: commonValidator.TextSchema(),
+            productCode: commonValidator.TextSchemaWithRequired(),
+            productQty: commonValidator. NumberSchemaWithRequired(),
+            productPrice:commonValidator.NumberSchemaWithRequired(),
+            productMrp:commonValidator.NumberSchema(),
+            productVal:commonValidator.NumberSchemaWithRequired(),
+            productBrand: commonValidator.TextSchemaWithRequired(),
+            productCategory:  commonValidator.TextSchemaWithRequired(),
+            productColor:  commonValidator.TextSchemaWithRequired(),
+            productSize:  commonValidator.TextSchemaWithRequired(),
+            productType: commonValidator.TextSchema(),
+
+
+        })
+    ),
+    customer:  Joi.object({
+        _id:commonValidator.TextSchemaWithRequired(),
+        customerName:  commonValidator.TextSchemaWithRequired(),
+        mobile: commonValidator.TextSchemaWithRequired(),
+    })
+})
+
+
+
+const transcationUpdateSchema = Joi.object({
+    status: commonValidator.booleanSchema(),
+    
+})
+
 
 // console.log(commonValidator.TextSchemaWithRequired());
 
@@ -76,6 +122,8 @@ module.exports = {
     sizeSchema,
     productSchema,
     customerSchema,
-    otherSchema
+    otherSchema,
+    transcationSchema,
+    transcationUpdateSchema
 }
 

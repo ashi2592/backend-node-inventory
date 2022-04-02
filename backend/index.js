@@ -25,7 +25,7 @@ try{
 
 
 const myLogger = function (req, res, next) {
-    console.log('LOGGED')
+    console.log('LOGGED', new Date())
     next()
 }
 // parse application/x-www-form-urlencoded
