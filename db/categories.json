@@ -1,0 +1,69 @@
+[{
+  "_id": {
+    "$oid": "623b5100d8834078593b3209"
+  },
+  "createdAt": {
+    "$date": "2022-03-23T16:55:28.907Z"
+  },
+  "categoryName": "Jeans",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56c28d6edf24f71f95c4"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:06.265Z"
+  },
+  "categoryName": "Shirt",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56ce8d6edf24f71f95c6"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:18.997Z"
+  },
+  "categoryName": "T SHIRT",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56d68d6edf24f71f95c8"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:26.584Z"
+  },
+  "categoryName": "LOWER",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56df8d6edf24f71f95ca"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:35.769Z"
+  },
+  "categoryName": "SHORTS",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56ea8d6edf24f71f95cc"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:46.178Z"
+  },
+  "categoryName": "WALLET",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56f38d6edf24f71f95ce"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:09:55.730Z"
+  },
+  "categoryName": "FULL T-SHIRT",
+  "status": true,
+  "__v": 0
+}]

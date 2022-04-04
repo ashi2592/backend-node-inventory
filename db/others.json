@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": true,
+  "keyName": "season",
+  "value": "Summer",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "status": true,
+  "keyName": "Store",
+  "value": "Ghataro",
+  "__v": 0
+}]

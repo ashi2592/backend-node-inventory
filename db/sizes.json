@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "623da029abcc23ad25c311a9"
+  },
+  "createdAt": {
+    "$date": "2022-03-25T10:57:45.966Z"
+  },
+  "sizeName": "Medium",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "624726cdef1639a6d57c7361"
+  },
+  "createdAt": {
+    "$date": "2022-04-01T16:22:37.137Z"
+  },
+  "sizeName": "Large",
+  "status": true,
+  "__v": 0
+}]

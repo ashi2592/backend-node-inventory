@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "623da1fcabcc23ad25c31242"
+  },
+  "createdAt": {
+    "$date": "2022-03-25T11:05:32.074Z"
+  },
+  "colorName": "Red",
+  "status": true,
+  "__v": 0
+}]

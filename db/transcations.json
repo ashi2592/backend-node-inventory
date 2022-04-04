@@ -1,0 +1,307 @@
+[{
+  "_id": {
+    "$oid": "6242b45288e88c5719bb1d77"
+  },
+  "totalVal": 1000,
+  "totalQty": 1,
+  "totalMrp": 2700,
+  "totalPrice": 1000,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": true,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 1,
+      "productPrice": 1000,
+      "productMrp": 2700,
+      "productVal": 1000,
+      "productCode": "100",
+      "_id": {
+        "$oid": "6242b45288e88c5719bb1d78"
+      }
+    }
+  ],
+  "customer": {
+    "customerName": "Ashish",
+    "phone": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-03-29T07:25:06.248Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6242b7bcb3bfdb784f3380e4"
+  },
+  "totalVal": 1000,
+  "totalQty": 1,
+  "totalMrp": 2700,
+  "totalPrice": 1000,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": true,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 1,
+      "productPrice": 1000,
+      "productMrp": 2700,
+      "productVal": 1000,
+      "productCode": "100",
+      "_id": {
+        "$oid": "6242b7bcb3bfdb784f3380e5"
+      }
+    }
+  ],
+  "customer": {
+    "_id": {
+      "$oid": "6242b45288e88c5719bb1d77"
+    },
+    "customerName": "Ashish",
+    "phone": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-03-29T07:39:40.631Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "624828318c2587a2c1f363a0"
+  },
+  "totalVal": 100,
+  "totalQty": 1,
+  "totalMrp": 200,
+  "totalPrice": 100,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": false,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 1,
+      "productPrice": 100,
+      "productMrp": 200,
+      "productVal": 100,
+      "productCode": "100",
+      "productBrand": {
+        "$oid": "623b57d824821e7632a15fc6"
+      },
+      "productColor": {
+        "$oid": "623da1fcabcc23ad25c31242"
+      },
+      "productCategory": {
+        "$oid": "623b5100d8834078593b3209"
+      },
+      "productSize": {
+        "$oid": "623da029abcc23ad25c311a9"
+      },
+      "_id": {
+        "$oid": "624828318c2587a2c1f363a1"
+      }
+    }
+  ],
+  "customer": {
+    "_id": {
+      "$oid": "6245ef79389831cae87fa14d"
+    },
+    "customerName": "Guest User",
+    "mobile": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-04-02T10:40:49.964Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "624828c38c2587a2c1f363ae"
+  },
+  "totalVal": 100,
+  "totalQty": 1,
+  "totalMrp": 200,
+  "totalPrice": 100,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": false,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 1,
+      "productPrice": 100,
+      "productMrp": 200,
+      "productVal": 100,
+      "productCode": "100",
+      "productBrand": {
+        "$oid": "623b57d824821e7632a15fc6"
+      },
+      "productColor": {
+        "$oid": "623da1fcabcc23ad25c31242"
+      },
+      "productCategory": {
+        "$oid": "623b5100d8834078593b3209"
+      },
+      "productSize": {
+        "$oid": "623da029abcc23ad25c311a9"
+      },
+      "_id": {
+        "$oid": "624828c38c2587a2c1f363af"
+      }
+    }
+  ],
+  "customer": {
+    "_id": {
+      "$oid": "6245ef79389831cae87fa14d"
+    },
+    "customerName": "Guest User",
+    "mobile": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-04-02T10:43:15.422Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62483eae8c2587a2c1f366aa"
+  },
+  "totalVal": 100,
+  "totalQty": 1,
+  "totalMrp": 200,
+  "totalPrice": 100,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": false,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 1,
+      "productPrice": 100,
+      "productMrp": 200,
+      "productVal": 100,
+      "productCode": "100",
+      "productBrand": {
+        "$oid": "623b57d824821e7632a15fc6"
+      },
+      "productColor": {
+        "$oid": "623da1fcabcc23ad25c31242"
+      },
+      "productCategory": {
+        "$oid": "623b5100d8834078593b3209"
+      },
+      "productSize": {
+        "$oid": "623da029abcc23ad25c311a9"
+      },
+      "_id": {
+        "$oid": "62483eae8c2587a2c1f366ab"
+      }
+    }
+  ],
+  "customer": {
+    "_id": {
+      "$oid": "6245ef79389831cae87fa14d"
+    },
+    "customerName": "Guest User",
+    "mobile": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-04-02T12:16:46.651Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "624b03a3cbe44cc832ce4de3"
+  },
+  "totalVal": 300,
+  "totalQty": 3,
+  "totalMrp": 200,
+  "totalPrice": 100,
+  "discount": 0,
+  "store": {
+    "$oid": "623e0af204e17fe2bbc50ae0"
+  },
+  "season": {
+    "$oid": "623e0acb04e17fe2bbc50adb"
+  },
+  "status": false,
+  "products": [
+    {
+      "productId": {
+        "$oid": "623ef4f1c67451169bf81b42"
+      },
+      "productName": "White Jeans",
+      "productQty": 3,
+      "productPrice": 100,
+      "productMrp": 200,
+      "productVal": 300,
+      "productCode": "100",
+      "productBrand": {
+        "$oid": "623b57d824821e7632a15fc6"
+      },
+      "productColor": {
+        "$oid": "623da1fcabcc23ad25c31242"
+      },
+      "productCategory": {
+        "$oid": "623b5100d8834078593b3209"
+      },
+      "productSize": {
+        "$oid": "623da029abcc23ad25c311a9"
+      },
+      "productType": {
+        "$oid": "623cbe34abcc23ad25c31043"
+      },
+      "_id": {
+        "$oid": "624b03a3cbe44cc832ce4de4"
+      }
+    }
+  ],
+  "customer": {
+    "_id": {
+      "$oid": "6245ef79389831cae87fa14d"
+    },
+    "customerName": "Guest User",
+    "mobile": "9097873118"
+  },
+  "createdAt": {
+    "$date": "2022-04-04T14:41:39.609Z"
+  },
+  "__v": 0
+}]

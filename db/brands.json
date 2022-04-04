@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "623b57d824821e7632a15fc6"
+  },
+  "createdAt": {
+    "$date": "2022-03-23T17:24:40.940Z"
+  },
+  "brandName": "Buffalo",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56a68d6edf24f71f95b8"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:08:38.146Z"
+  },
+  "brandName": "Lee Copper",
+  "status": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623f56b18d6edf24f71f95ba"
+  },
+  "createdAt": {
+    "$date": "2022-03-26T18:08:49.882Z"
+  },
+  "brandName": "LA MONGIE",
+  "status": true,
+  "__v": 0
+}]

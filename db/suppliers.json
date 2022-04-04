@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "623cb50ddbdfea32c59a6c98"
+  },
+  "createdAt": {
+    "$date": "2022-03-24T18:14:37.527Z"
+  },
+  "supplierName": "Hermanos",
+  "status": true,
+  "__v": 0
+}]

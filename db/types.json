@@ -1,0 +1,20 @@
+[{
+  "_id": {
+    "$oid": "623cbe34abcc23ad25c31043"
+  },
+  "createdAt": {
+    "$date": "2022-03-24T18:53:40.015Z"
+  },
+  "typeName": "cotton",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623cbec4abcc23ad25c31076"
+  },
+  "createdAt": {
+    "$date": "2022-03-24T18:56:04.771Z"
+  },
+  "typeName": "Cutton strech",
+  "status": true,
+  "__v": 0
+}]
