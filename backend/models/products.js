@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate-v2');
+var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const Schema =  mongoose.Schema;
 
 var schema = new Schema({
@@ -21,6 +22,7 @@ var schema = new Schema({
 
 });
 schema.plugin(mongoosePaginate);
+schema.plugin(aggregatePaginate);
 
 const products = mongoose.model('products', schema)
 

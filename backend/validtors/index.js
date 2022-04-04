@@ -9,6 +9,9 @@ const categorySchema = Joi.object({
 
 const supplierSchema = Joi.object({
     supplierName: commonValidator.TextSchemaWithRequired(),
+    contact: commonValidator.TextSchema(),
+    addresss: commonValidator.TextSchema(),
+    location: commonValidator.TextSchema(),
     status: commonValidator.booleanSchema()
 })
 
@@ -51,6 +54,7 @@ const productSchema = Joi.object({
     productMrp:  commonValidator.NumberSchema(),
     store: commonValidator.TextSchemaWithRequired(),
     season: commonValidator.TextSchemaWithRequired(),
+    barcodes: Joi.array().items(Joi.string())
 })
 
 

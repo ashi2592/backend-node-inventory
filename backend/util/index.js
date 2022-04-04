@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const getObjectId = (id = '') =>{
-    return mongoose.Schema.Types.ObjectId(id);
+    return mongoose.Types.ObjectId(id);
 }
 
 const paginateOptions = (pageNo, Limit=10) =>{

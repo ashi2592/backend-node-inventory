@@ -1,12 +1,17 @@
 const productModel = require('../models/products');
+const { ProductAggreateQuery } = require('../query/products');
 const util = require('../util/index');
-const ValidationSchema = require('../validtors/index')
+const ValidationSchema = require('../validtors/index');
 
 const getProducts = async (req, res, next) => {
     try {
         const { page, count = 10 } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await productModel.paginate({}, paginationOption)
+
+        var myAggregate = productModel.aggregate(ProductAggreateQuery);
+        // const existingdata = await productModel.paginate({}, paginationOption)
+        const existingdata = await productModel.aggregatePaginate(myAggregate, paginationOption)
+
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -28,8 +33,9 @@ const searchProduct = async (req, res, next) => {
 const getProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const existingdata = await productModel.findById(id)
-        res.status(200).json(existingdata)
+        const myQuery = [...[{ '$match': { _id: util.getObjectId(id) } }], ...ProductAggreateQuery];
+        const existingdata = await productModel.aggregate(myQuery)
+        res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
     }
     catch (err) {
         res.status(400).json({ message: err.message })
@@ -39,13 +45,9 @@ const getProduct = async (req, res, next) => {
 const addProduct = async (req, res, next) => {
     try {
         const reqBody = req.body;
-
-        console.log(req.body)
         const value = await util.ValidateData(ValidationSchema.productSchema, req.body);
         if (value) {
             let productModelObj = new productModel(req.body);
-            // productModelObj.productName = reqBody.productName;
-            // productModelObj.status = reqBody.status;
             await productModelObj.save()
             res.status(200).json(productModelObj)
         }
@@ -65,7 +67,9 @@ const updateProduct = async (req, res, next) => {
         if (value) {
             const { id } = req.params;
             const data = await productModel.findByIdAndUpdate(id, req.body)
-            res.status(200).json(data)
+            const myQuery = [...[{ '$match': { _id: util.getObjectId(id) } }], ...ProductAggreateQuery];
+            const existingdata = await productModel.aggregate(myQuery)
+            res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
         }
 
     }
