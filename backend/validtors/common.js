@@ -1,13 +1,13 @@
 const Joi = require('joi');
 
-exports.TextSchemaWithRequired = (min =3,max=30) =>{
+exports.TextSchemaWithRequired = (min =2,max=30) =>{
     return Joi.string()
     .min(3)
     .max(30)
     .required()
 }
 
-exports.TextSchema = (min =3,max=30) =>{
+exports.TextSchema = (min =2,max=30) =>{
     return Joi.string()
     .min(3)
     .max(30)

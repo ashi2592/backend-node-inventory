@@ -7,15 +7,16 @@ var productSchema = ({
     productId: { type: mongoose.Schema.Types.ObjectId },
     productName: { type: String, required: true },
     productQty: { type: Number, default: 0, required: true },
-    productPrice: { type: Number, default: 0, required: true },
-    productMrp: { type: Number, default: 0 },
-    productVal: { type: Number, default: 0, required: true },
     productCode: { type: String, required: true },
     productBrand: { type: mongoose.Schema.Types.ObjectId },
     productColor: { type: mongoose.Schema.Types.ObjectId },
     productCategory: { type: mongoose.Schema.Types.ObjectId },
     productSize: { type: mongoose.Schema.Types.ObjectId },
     productType:  { type: mongoose.Schema.Types.ObjectId },
+    productPrice: { type: Number, default: 0, required: true },
+    productMrp: { type: Number, default: 0 },
+    productVal: { type: Number, default: 0, required: true },
+
 })
 
 
@@ -37,7 +38,9 @@ var schema = new Schema({
     status: { type: Boolean, default: false },
     createdAt: { type: Date, required: true, default: Date.now },
     products: { type: [productSchema], },
-    customer: {type: customerSchema} 
+    customer: {type: customerSchema},
+    storeId: {type:String},
+    orderType: {type: String, default:'sale'},
 });
 schema.plugin(mongoosePaginate);
 

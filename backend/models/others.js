@@ -5,7 +5,8 @@ var mongoosePaginate = require('mongoose-paginate-v2');
 const otherSchema =  new Schema({
     keyName: {type: String, required: true},
     value: {type:String,required: true},
-    status:{type: Boolean, default: true}
+    status:{type: Boolean, default: true},
+    storeId: {type:String},
 })
 otherSchema.plugin(mongoosePaginate)
 

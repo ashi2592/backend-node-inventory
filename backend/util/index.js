@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 
+
 const getObjectId = (id = '') =>{
     return mongoose.Types.ObjectId(id);
 }
@@ -12,6 +13,7 @@ const paginateOptions = (pageNo, Limit=10) =>{
         collation: {
           locale: 'en',
         },
+        sort: {_id:-1}
       };
 
 
@@ -34,8 +36,14 @@ const  ValidateData = async (schema,body) =>{
    
 }
 
+const calculateTax = (price,tax=5)=>{
+ return (parseInt(price)*5)/100;
+}
+
+
 module.exports = {
     getObjectId,
     paginateOptions,
-    ValidateData
+    ValidateData,
+    calculateTax
 }

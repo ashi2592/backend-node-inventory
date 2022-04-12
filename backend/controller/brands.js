@@ -4,9 +4,9 @@ const ValidationSchema = require('../validtors/index')
 
 const getBrands = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await brandModel.paginate({}, paginationOption)
+        const existingdata = await brandModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -34,6 +34,7 @@ const addBrand = async (req, res, next) => {
             let brandModelObj = new brandModel();
             brandModelObj.brandName = reqBody.brandName;
             brandModelObj.status = reqBody.status;
+            brandModelObj.storeId = reqBody.storeId;
             await brandModelObj.save()
             res.status(200).json(brandModelObj)
         }
@@ -65,8 +66,8 @@ const updateBrand = async (req, res, next) => {
 
 const deleteBrand = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const data = await brandModel.findByIdAndDelete(id)
+        const { id,storeId } = req.params;
+        const data = await brandModel.findOneAndRemove({id,storeId})
         if (data) {
             res.status(200).json(data)
         } else {

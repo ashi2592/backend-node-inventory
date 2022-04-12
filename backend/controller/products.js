@@ -1,14 +1,14 @@
 const productModel = require('../models/products');
-const { ProductAggreateQuery } = require('../query/products');
+const { ProductAggreateQuery, barcodeSearchQuery } = require('../query/products');
 const util = require('../util/index');
 const ValidationSchema = require('../validtors/index');
 
 const getProducts = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
 
-        var myAggregate = productModel.aggregate(ProductAggreateQuery);
+        var myAggregate = productModel.aggregate(ProductAggreateQuery(storeId));
         // const existingdata = await productModel.paginate({}, paginationOption)
         const existingdata = await productModel.aggregatePaginate(myAggregate, paginationOption)
 
@@ -33,7 +33,20 @@ const searchProduct = async (req, res, next) => {
 const getProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const myQuery = [...[{ '$match': { _id: util.getObjectId(id) } }], ...ProductAggreateQuery];
+        const myQuery = [...ProductAggreateQuery, ...[{ '$match': { _id: util.getObjectId(id) } }]];
+        const existingdata = await productModel.aggregate(myQuery)
+        res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
+
+
+const getProductBybarcode = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const myQuery = barcodeSearchQuery(id)
         const existingdata = await productModel.aggregate(myQuery)
         res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
     }
@@ -60,7 +73,6 @@ const addProduct = async (req, res, next) => {
 
 
 const updateProduct = async (req, res, next) => {
-
     try {
         const reqBody = req.body;
         const value = await util.ValidateData(ValidationSchema.productSchema, reqBody);
@@ -78,6 +90,7 @@ const updateProduct = async (req, res, next) => {
     }
 
 }
+
 
 const deleteProduct = async (req, res, next) => {
     try {
@@ -121,5 +134,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     searchProduct,
-    getProductAvailiabity
+    getProductAvailiabity,
+    getProductBybarcode
 }

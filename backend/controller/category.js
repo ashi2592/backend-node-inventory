@@ -4,9 +4,10 @@ const ValidationSchema = require('../validtors/index')
 
 const getCategories = async (req, res, next) => {
     try {
-        const { page, count = 10,searchText='' } = req.query;
+        
+        const { page, count = 10,searchText='',storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        let query = {};
+        let query = {storeId};
 
         if(searchText){
             query = {categoryName: {'$regex': searchText}}
@@ -35,11 +36,11 @@ const addCategory = async (req, res, next) => {
     try {
         const reqBody = req.body;
         const value = await util.ValidateData(ValidationSchema.categorySchema, reqBody);
+        console.log(value)
         if (value) {
-            let categoriesModelObj = new CategoryModel();
-            categoriesModelObj.categoryName = reqBody.categoryName;
-            categoriesModelObj.status = reqBody.status;
-            await categoriesModelObj.save()
+
+            let categoriesModelObj = new CategoryModel(reqBody);
+                     await categoriesModelObj.save()
             res.status(200).json(categoriesModelObj)
         }
 

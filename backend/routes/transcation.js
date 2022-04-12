@@ -26,7 +26,7 @@ routes.put('/status/:id', controller.updateTransctionstatus);
 //  * Get All data
 //  */
 
-// routes.get('/', controller.getOthers)
+routes.get('/', controller.getTransactions)
 
 
 // /**

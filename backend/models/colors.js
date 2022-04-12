@@ -5,6 +5,7 @@ const Schema =  mongoose.Schema;
 
 var schema = new Schema({
     colorName: { type: String },
+    storeId: {type:String},
     status: { type: Boolean },
     createdAt: { type: Date, required: true, default: Date.now }
 });

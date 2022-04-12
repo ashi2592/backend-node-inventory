@@ -10,6 +10,12 @@ const suppliers = require('./suppliers');
 const customers = require('./customers');
 const others = require('./others');
 const transcation =  require('./transcation')
+const barcodes =  require('./barcodes')
+const users =  require('./users')
+const dashboard =  require('./dashboard')
+
+
+
 
 
 router.get('/', function (req, res, next) {
@@ -17,6 +23,15 @@ router.get('/', function (req, res, next) {
     res.end();
 })
 
+router.use("/",(req,res,next)=>{
+    const storeId = req.headers.storeId ? req.headers.storeId :'thefashionhub'
+    req.body.storeId = storeId;
+    req.query.storeId = storeId;
+    req.params.storeId = storeId;
+  
+
+    next()
+})
 router.use('/category', categories);
 router.use('/type', types);
 router.use('/size', sizes);
@@ -27,6 +42,12 @@ router.use('/customer', customers);
 router.use('/product', products);
 router.use('/other', others);
 router.use('/transcation',transcation)
+router.use('/barcode',barcodes)
+router.use('/user', users)
+router.use('/dashboard', dashboard)
+
+
+
 
 
 

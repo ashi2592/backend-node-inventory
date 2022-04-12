@@ -15,10 +15,16 @@ var schema = new Schema({
     productType: { type: mongoose.Schema.Types.ObjectId },
     productSize: { type: mongoose.Schema.Types.ObjectId },
     productPrice: {type: Number, required: true, default:0},
+    productPurchasePrice: {type: Number, default:0},
+    productPurchaseTax: {type: Number, default:0},
     productMrp: {type: Number, default: 0},
     store:{type: mongoose.Schema.Types.ObjectId},
     season:{type: mongoose.Schema.Types.ObjectId},
-    createdAt: { type: Date, required: true, default: Date.now }
+    createdAt: { type: Date, required: true, default: Date.now },
+    storeId: {type:String},
+    priceType:{type: String, default:'flat'}, // discount, flat
+    purchaseStatus:{type:String, default: 'new'}, // new, return, replaced, return-in-cash
+    discount:{type:Number}
 
 });
 schema.plugin(mongoosePaginate);

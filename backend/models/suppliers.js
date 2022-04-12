@@ -8,6 +8,7 @@ var schema = new Schema({
     contact: {type: String},
     addresss: {type: String},
     location: {type: String},
+    storeId: {type:String},
     createdAt: { type: Date, required: true, default: Date.now }
 });
 schema.plugin(mongoosePaginate);

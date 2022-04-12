@@ -31,9 +31,9 @@ const addSupplier = async (req, res, next) => {
         const reqBody = req.body;
         const value = await util.ValidateData(ValidationSchema.supplierSchema, reqBody);
         if (value) {
-            let supplierModelObj = new supplierModel();
-            supplierModelObj.supplierName = reqBody.supplierName;
-            supplierModelObj.status = reqBody.status;
+            let supplierModelObj = new supplierModel(reqBody);
+            // supplierModelObj.supplierName = reqBody.supplierName;
+            // supplierModelObj.status = reqBody.status;
             await supplierModelObj.save()
             res.status(200).json(supplierModelObj)
         }

@@ -5,7 +5,8 @@ const Schema =  mongoose.Schema;
 var schema = new Schema({
     sizeName: { type: String },
     status: { type: Boolean },
-    createdAt: { type: Date, required: true, default: Date.now }
+    createdAt: { type: Date, required: true, default: Date.now },
+    storeId: {type:String},
 });
 schema.plugin(mongoosePaginate);
 

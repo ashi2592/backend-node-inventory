@@ -12,6 +12,8 @@ routes.post('/', controller.addProduct)
 
 
 routes.get('/search', controller.searchProduct)
+routes.get('/barcode/:id', controller.getProductBybarcode)
+
 
 routes.get('/availiablity', controller.getProductAvailiabity);
 

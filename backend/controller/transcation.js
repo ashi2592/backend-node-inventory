@@ -1,13 +1,14 @@
 const transcationsModel = require('../models/transcation');
 const productModel = require('../models/products')
 const util = require('../util/index');
-const ValidationSchema = require('../validtors/index')
+const ValidationSchema = require('../validtors/index');
+const orderType = 'sale';
 
 const getTransactions = async (req, res, next) => {
     try {
         const { page, count = 10 } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await transcationsModel.paginate({}, paginationOption)
+        const existingdata = await transcationsModel.paginate({orderType:orderType}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -15,16 +16,6 @@ const getTransactions = async (req, res, next) => {
     }
 }
 
-// const searchProduct = async (req, res, next) => {
-//     try {
-//         const { searchText } = req.query;
-//         const existingdata = await productModel.find({"$or":[{productCode:  {'$regex':searchText}},{productName:  {'$regex':searchText}}]}).limit(10)
-//         res.status(200).json(existingdata)
-//     }
-//     catch (err) {
-//         res.status(400).json({ message: err.message })
-//     }
-// }
 
 const getTransaction = async (req, res, next) => {
     try {
@@ -46,6 +37,7 @@ const addTranscation = async (req, res, next) => {
         if (value) {
             let transcationsModelObj = new transcationsModel(req.body);
             transcationsModelObj.status = false;
+            transcationsModelObj.orderType = orderType;
             await transcationsModelObj.save();
             res.status(200).json(transcationsModelObj)
         }
@@ -63,8 +55,6 @@ const updateTransctionstatus = async (req, res, next) => {
         if (value) {
             const { id } = req.params;
             const transcationInfo = await transcationsModel.findByIdAndUpdate(id, reqBody);
-
-
             if (transcationInfo && reqBody.status) {
                 const ids = transcationInfo.products.map(x => x.productId);
                 const newdata = await productModel.updateMany({ _id: { '$in': ids } }, { $inc: { productQty: -1 } });
@@ -120,5 +110,5 @@ module.exports = {
     addTranscation,
     updateTranscation,
     deleteTranscation,
-    updateTransctionstatus
+    updateTransctionstatus,
 }
