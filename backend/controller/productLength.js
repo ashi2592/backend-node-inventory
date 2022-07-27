@@ -1,12 +1,12 @@
-const supplierModel = require('../models/suppliers');
+const lengthModel = require('../models/productLength');
 const util = require('../util/index');
 const ValidationSchema = require('../validtors/index')
 
-const getSuppliers = async (req, res, next) => {
+const getLengths = async (req, res, next) => {
     try {
         const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await supplierModel.paginate({storeId}, paginationOption)
+        const existingdata = await lengthModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -15,10 +15,10 @@ const getSuppliers = async (req, res, next) => {
 }
 
 
-const getSupplier = async (req, res, next) => {
+const getLength = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const existingdata = await supplierModel.findById(id)
+        const existingdata = await lengthModel.findById(id)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -26,17 +26,17 @@ const getSupplier = async (req, res, next) => {
     }
 }
 
-const addSupplier = async (req, res, next) => {
+const addLength = async (req, res, next) => {
     try {
         const reqBody = req.body;
-        const value = await util.ValidateData(ValidationSchema.supplierSchema, reqBody);
+        const value = await util.ValidateData(ValidationSchema.lengthSchema, reqBody);
         if (value) {
-            let supplierModelObj = new supplierModel(reqBody);
-            supplierModelObj.storeId = reqBody.storeId;
-            // supplierModelObj.supplierName = reqBody.supplierName;
-            // supplierModelObj.status = reqBody.status;
-            await supplierModelObj.save()
-            res.status(200).json(supplierModelObj)
+            let lengthModelObj = new lengthModel();
+            lengthModelObj.lengthName = reqBody.lengthName;
+            lengthModelObj.status = reqBody.status;
+            lengthModelObj.storeId = reqBody.storeId;
+            await lengthModelObj.save()
+            res.status(200).json(lengthModelObj)
         }
 
     }
@@ -46,14 +46,14 @@ const addSupplier = async (req, res, next) => {
 }
 
 
-const updateSupplier = async (req, res, next) => {
+const updateLenght = async (req, res, next) => {
 
     try {
         const reqBody = req.body;
-        const value = await util.ValidateData(ValidationSchema.supplierSchema, reqBody);
+        const value = await util.ValidateData(ValidationSchema.lengthSchema, reqBody);
         if (value) {
             const { id } = req.params;
-            const data = await supplierModel.findByIdAndUpdate(id, req.body)
+            const data = await lengthModel.findByIdAndUpdate(id, req.body)
             res.status(200).json(data)
         }
 
@@ -64,10 +64,10 @@ const updateSupplier = async (req, res, next) => {
 
 }
 
-const deleteSupplier = async (req, res, next) => {
+const deleteLength = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const data = await supplierModel.findByIdAndDelete(id)
+        const data = await lengthModel.findByIdAndDelete(id)
         if (data) {
             res.status(200).json(data)
         } else {
@@ -82,9 +82,9 @@ const deleteSupplier = async (req, res, next) => {
 }
 
 module.exports = {
-    getSuppliers,
-    getSupplier,
-    addSupplier,
-    updateSupplier,
-    deleteSupplier
+    getLengths,
+    getLength,
+    addLength,
+    updateLenght,
+    deleteLength
 }

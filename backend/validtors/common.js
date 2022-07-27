@@ -1,16 +1,16 @@
 const Joi = require('joi');
 
-exports.TextSchemaWithRequired = (min =2,max=30) =>{
+exports.TextSchemaWithRequired = (min =2,max=120) =>{
     return Joi.string()
     .min(3)
-    .max(30)
+    .max(max)
     .required()
 }
 
-exports.TextSchema = (min =2,max=30) =>{
+exports.TextSchema = (min =2,max=120) =>{
     return Joi.string()
     .min(3)
-    .max(30)
+    .max(max)
 }
 
 
@@ -26,16 +26,16 @@ exports.refernceSchema = (refernceSchema = 'password') =>{
 
 exports.NumberSchema = (max=99999999999) =>{
     return Joi.number()
-    .integer()
     .max(max)
 }
 
 exports.NumberSchemaWithRequired = (max=99999999999) =>{
     return Joi.number()
-    .integer()
     .max(max)
     .required()
 }
+
+
 
 exports.emailSchema = () =>{
     return Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } });

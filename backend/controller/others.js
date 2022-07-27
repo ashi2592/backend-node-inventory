@@ -4,9 +4,9 @@ const ValidationSchema = require('../validtors/index')
 
 const getOthers = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await otherSchema.paginate({}, paginationOption)
+        const existingdata = await otherSchema.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -35,6 +35,7 @@ const addOther = async (req, res, next) => {
             staticsObj.keyName = reqBody.keyName;
             staticsObj.value = reqBody.value;
             staticsObj.status = reqBody.status;
+            staticsObj.storeId = reqBody.storeId;
             await staticsObj.save()
             res.status(200).json(staticsObj)
         }

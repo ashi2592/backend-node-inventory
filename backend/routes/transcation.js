@@ -11,6 +11,8 @@ const controller = require('../controller/transcation')
 routes.post('/', controller.addTranscation);
 
 routes.put('/status/:id', controller.updateTransctionstatus);
+routes.put('/return-product/:id', controller.refundProductTranscation);
+
 
 
 
@@ -34,7 +36,7 @@ routes.get('/', controller.getTransactions)
 //  * Get File data with Id
 //  */
 
-// routes.get('/:id', controller.getOther)
+routes.get('/:id', controller.getTransaction)
 
 // /**
 //  * Delete Method

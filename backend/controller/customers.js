@@ -1,12 +1,14 @@
 const customerModel = require('../models/customers');
 const util = require('../util/index');
 const ValidationSchema = require('../validtors/index')
+const transcationsModel = require('../models/transcation');
+const { getCustomerStatsQuery } = require('../query/customer');
 
 const getCustomers = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await customerModel.paginate({}, paginationOption)
+        const existingdata = await customerModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -36,6 +38,7 @@ const addCustomer = async (req, res, next) => {
             customerModelObj.customerName = reqBody.customerName|| 'Guest User';
             customerModelObj.mobile = reqBody.mobile;
             customerModelObj.status = reqBody.status;
+            customerModelObj.storeId = reqBody.storeId;
             await customerModelObj.save()
             res.status(200).json(customerModelObj)
         }
@@ -82,10 +85,25 @@ const deleteCustomer = async (req, res, next) => {
 
 }
 
+const getCustomerStats = async (req,res,next) =>{
+    try {
+        const {id,storeId } = req.params;
+        let query = getCustomerStatsQuery(id);
+        console.log(query)
+        const existingdata = await transcationsModel.aggregate(query)
+        res.status(200).json(existingdata)
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
+
+
 module.exports = {
     getCustomers,
     getCustomer,
     addCustomer,
     updateCustomer,
-    deleteCustomer
+    deleteCustomer,
+    getCustomerStats
 }

@@ -4,9 +4,9 @@ const ValidationSchema = require('../validtors/index')
 
 const getTypes = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await typeModel.paginate({}, paginationOption)
+        const existingdata = await typeModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -34,6 +34,7 @@ const addType = async (req, res, next) => {
             let typeModelObj = new typeModel();
             typeModelObj.typeName = reqBody.typeName;
             typeModelObj.status = reqBody.status;
+            typeModelObj.storeId =reqBody.storeId;
             await typeModelObj.save()
             res.status(200).json(typeModelObj)
         }

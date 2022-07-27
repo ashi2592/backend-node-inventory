@@ -4,9 +4,9 @@ const ValidationSchema = require('../validtors/index')
 
 const getColors = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10, storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await colorModel.paginate({}, paginationOption)
+        const existingdata = await colorModel.paginate({ storeId }, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -33,7 +33,9 @@ const addColor = async (req, res, next) => {
         if (value) {
             let colorModelObj = new colorModel();
             colorModelObj.colorName = reqBody.colorName;
+            colorModelObj.colorCode = reqBody.colorCode;
             colorModelObj.status = reqBody.status;
+            colorModelObj.storeId = reqBody.storeId;
             await colorModelObj.save()
             res.status(200).json(colorModelObj)
         }
@@ -46,7 +48,6 @@ const addColor = async (req, res, next) => {
 
 
 const updateColor = async (req, res, next) => {
-
     try {
         const reqBody = req.body;
         const value = await util.ValidateData(ValidationSchema.colorSchema, reqBody);

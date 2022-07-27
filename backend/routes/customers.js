@@ -24,6 +24,8 @@ routes.put('/:id', controller.updateCustomer)
 
 routes.get('/', controller.getCustomers)
 
+routes.get('/stats/:id', controller.getCustomerStats)
+
 
 /**
  * 
@@ -31,6 +33,7 @@ routes.get('/', controller.getCustomers)
  */
 
 routes.get('/:id', controller.getCustomer)
+
 
 /**
  * Delete Method

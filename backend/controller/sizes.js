@@ -4,9 +4,9 @@ const ValidationSchema = require('../validtors/index')
 
 const getSizes = async (req, res, next) => {
     try {
-        const { page, count = 10 } = req.query;
+        const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await sizeModel.paginate({}, paginationOption)
+        const existingdata = await sizeModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -34,6 +34,9 @@ const addSize = async (req, res, next) => {
             let sizeModelObj = new sizeModel();
             sizeModelObj.sizeName = reqBody.sizeName;
             sizeModelObj.status = reqBody.status;
+            sizeModelObj.storeId = reqBody.storeId;
+
+            
             await sizeModelObj.save()
             res.status(200).json(sizeModelObj)
         }

@@ -3,7 +3,11 @@ const commonValidator = require('./common')
 
 const categorySchema = Joi.object({
     categoryName: commonValidator.TextSchemaWithRequired(),
+    imageUrl: commonValidator.TextSchema(),
     status: commonValidator.booleanSchema(),
+    taxPercent: commonValidator.TextSchema(),
+    hascode: commonValidator.TextSchema(),
+    parent: commonValidator.TextSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
 })
 
@@ -19,12 +23,14 @@ const supplierSchema = Joi.object({
 
 const brandSchema = Joi.object({
     brandName: commonValidator.TextSchemaWithRequired(),
+    imageUrl: commonValidator.TextSchema(),
     status: commonValidator.booleanSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
 })
 
 const colorSchema = Joi.object({
     colorName: commonValidator.TextSchemaWithRequired(),
+    colorCode: commonValidator.TextSchema(),
     status: commonValidator.booleanSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
 })
@@ -32,6 +38,19 @@ const colorSchema = Joi.object({
 
 const typeSchema = Joi.object({
     typeName: commonValidator.TextSchemaWithRequired(),
+    status: commonValidator.booleanSchema(),
+    storeId: commonValidator.TextSchemaWithRequired(),
+})
+
+const patternSchema = Joi.object({
+    patternName: commonValidator.TextSchemaWithRequired(),
+    status: commonValidator.booleanSchema(),
+    storeId: commonValidator.TextSchemaWithRequired(),
+})
+
+
+const lengthSchema = Joi.object({
+    lengthName: commonValidator.TextSchemaWithRequired(),
     status: commonValidator.booleanSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
 })
@@ -47,21 +66,15 @@ const sizeSchema = Joi.object({
 const productSchema = Joi.object({
     _id: commonValidator.TextSchema(),
     productName: commonValidator.TextSchemaWithRequired(),
-    productCode: commonValidator.TextSchemaWithRequired(),
+    productBrand: commonValidator.TextSchemaWithRequired(),
     productCategory: commonValidator.TextSchemaWithRequired(),
     status: commonValidator.booleanSchema(),
-    productBrand: commonValidator.TextSchemaWithRequired(),
-    productColor: commonValidator.TextSchemaWithRequired(),
-    productQty: commonValidator.NumberSchema(),
-    productSupplier: commonValidator.TextSchemaWithRequired(),
-    productType: commonValidator.TextSchema(),
-    productSize: commonValidator.TextSchemaWithRequired(),
-    productPrice: commonValidator.NumberSchema(),
-    productMrp: commonValidator.NumberSchema(),
     store: commonValidator.TextSchemaWithRequired(),
     season: commonValidator.TextSchemaWithRequired(),
-    barcodes: Joi.array().items(Joi.string()),
     storeId: commonValidator.TextSchemaWithRequired(),
+    thumbnil: commonValidator.TextSchema(),
+    productPrice: commonValidator.NumberSchema().default(0),
+    productDescription: commonValidator.TextSchema()
 })
 
 
@@ -84,29 +97,32 @@ const otherSchema = Joi.object({
 
 const transcationSchema = Joi.object({
     _id: commonValidator.TextSchema(),
+    orderId: commonValidator.TextSchema(),
     totalVal: commonValidator.NumberSchemaWithRequired(),
     totalQty: commonValidator.NumberSchemaWithRequired(),
     totalMrp: commonValidator.NumberSchemaWithRequired(),
     totalPrice: commonValidator.NumberSchemaWithRequired(),
+    totalProfit: commonValidator.NumberSchema(),
+    paidAmount: commonValidator.NumberSchema(),
+    creditAmount: commonValidator.NumberSchema(),
+    returnAmount: commonValidator.NumberSchema(),
     discount: commonValidator.NumberSchema(),
-    store: commonValidator.TextSchemaWithRequired(),
-    season: commonValidator.TextSchemaWithRequired(),
     storeId: commonValidator.TextSchemaWithRequired(),
     products: Joi.array().items(
         Joi.object({
-            productId: commonValidator.TextSchema(),
-            productName: commonValidator.TextSchema(),
-            productCode: commonValidator.TextSchemaWithRequired(),
+            productId: commonValidator.TextSchemaWithRequired(),
+            variantId: commonValidator.TextSchemaWithRequired(),
+            purchaseId: commonValidator.TextSchemaWithRequired(),
+            purchaseProductId: commonValidator.TextSchemaWithRequired(),
+            sellPrice: commonValidator.NumberSchemaWithRequired(),
+            singleItem: commonValidator.NumberSchemaWithRequired(),
             productQty: commonValidator.NumberSchemaWithRequired(),
-            productPrice: commonValidator.NumberSchemaWithRequired(),
-            productMrp: commonValidator.NumberSchema(),
-            productVal: commonValidator.NumberSchemaWithRequired(),
-            productBrand: commonValidator.TextSchemaWithRequired(),
-            productCategory: commonValidator.TextSchemaWithRequired(),
-            productColor: commonValidator.TextSchemaWithRequired(),
-            productSize: commonValidator.TextSchemaWithRequired(),
-            productType: commonValidator.TextSchema(),
-
+            mrp: commonValidator.NumberSchema(),
+            tax: commonValidator.NumberSchema(),
+            productText: commonValidator.TextSchemaWithRequired(),
+            variantText: commonValidator.TextSchemaWithRequired(),
+            singleItem: commonValidator.NumberSchemaWithRequired(),
+            barcode: commonValidator.TextSchema(),
 
         })
     ),
@@ -121,15 +137,25 @@ const transcationSchema = Joi.object({
 
 const transcationUpdateSchema = Joi.object({
     status: commonValidator.booleanSchema(),
+    paidAmount: commonValidator.NumberSchema(),
+    creditAmount: commonValidator.NumberSchema(),
+    returnAmount: commonValidator.NumberSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
 })
 
 
 const barcodeSchema = Joi.object({
     productId: commonValidator.TextSchemaWithRequired(),
+    variantId: commonValidator.TextSchemaWithRequired(),
+    purchaseId: commonValidator.TextSchemaWithRequired(),
+    purchaseProductId: commonValidator.TextSchemaWithRequired(),
+    transcationId: commonValidator.TextSchema(),
+    transactionProductId: commonValidator.TextSchema(),
     barcode: commonValidator.TextSchemaWithRequired(),
+    qty: commonValidator.NumberSchemaWithRequired(),
     status: commonValidator.booleanSchema(),
     storeId: commonValidator.TextSchemaWithRequired(),
+    isReduceAble: commonValidator.booleanSchema().default(false),
 })
 
 
@@ -140,7 +166,71 @@ const userSchema = Joi.object({
 })
 
 
+
+const returnProductSchema = Joi.object({
+    productId: commonValidator.TextSchemaWithRequired(),
+    storeId: commonValidator.TextSchemaWithRequired(),
+    codes: commonValidator.TextSchemaWithRequired(),
+    previousCode: commonValidator.TextSchemaWithRequired(),
+})
+
 // console.log(commonValidator.TextSchemaWithRequired());
+
+
+
+const variantProducts = Joi.object({
+    _id: commonValidator.TextSchema(),
+    productId: commonValidator.TextSchemaWithRequired(),
+    productColor: commonValidator.TextSchemaWithRequired(),
+    productType: commonValidator.TextSchemaWithRequired(),
+    productSize: commonValidator.TextSchemaWithRequired(),
+    productLength: commonValidator.TextSchemaWithRequired(),
+    productPattern: commonValidator.TextSchemaWithRequired(),
+    articleNo: commonValidator.TextSchema(),
+    storeId: commonValidator.TextSchemaWithRequired(),
+    isReduceAble: commonValidator.booleanSchema()
+})
+
+
+
+const purchaseSchema = Joi.object({
+    _id: commonValidator.TextSchema(),
+    supplier: commonValidator.TextSchemaWithRequired(),
+    supplierText: commonValidator.TextSchemaWithRequired(),
+    storeId: commonValidator.TextSchemaWithRequired(),
+    totalAmount: commonValidator.NumberSchemaWithRequired(),
+    totalQty: commonValidator.NumberSchema(),
+    taxAmount: commonValidator.NumberSchema(),
+    delivery: commonValidator.NumberSchema(),
+    products: Joi.array().items(
+        Joi.object({
+            productId: commonValidator.TextSchemaWithRequired(),
+            variantId: commonValidator.TextSchemaWithRequired(),
+            purchasePrice: commonValidator.NumberSchemaWithRequired(),
+            taxAmount: commonValidator.NumberSchema(),
+            deliveryCharge: commonValidator.NumberSchema(),
+            sellPrice: commonValidator.NumberSchemaWithRequired(),
+            qty: commonValidator.NumberSchemaWithRequired(),
+            mrp: commonValidator.NumberSchema(),
+            productText: commonValidator.TextSchemaWithRequired(),
+            singleItem: commonValidator.NumberSchemaWithRequired(),
+            tax: commonValidator.NumberSchemaWithRequired(),
+            totalAmount: commonValidator.NumberSchemaWithRequired(),
+            variantText: commonValidator.TextSchemaWithRequired(),
+            articleNo: commonValidator.TextSchemaWithRequired(),
+        })
+    )
+});
+
+const UpdatePurchaseProductSchema = Joi.object({
+    purchasePrice: commonValidator.NumberSchema(),
+    taxAmount: commonValidator.NumberSchema(),
+    deliveryCharge: commonValidator.NumberSchema(),
+    salePrice: commonValidator.NumberSchemaWithRequired(),
+    qty: commonValidator.NumberSchema(),
+})
+
+
 
 module.exports = {
     categorySchema,
@@ -155,6 +245,12 @@ module.exports = {
     transcationSchema,
     transcationUpdateSchema,
     barcodeSchema,
-    userSchema
+    userSchema,
+    returnProductSchema,
+    lengthSchema,
+    variantProducts,
+    patternSchema,
+    purchaseSchema,
+    UpdatePurchaseProductSchema
 }
 

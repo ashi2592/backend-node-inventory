@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 var cors = require('cors')
 var bodyParser = require('body-parser')
-const routes = require('./routes/routes');
+const routes = require('./routes');
 const mongoose = require('mongoose');
 
 
 try{
-    mongoose.connect(process.env.MONGOURL,(err)=>{
+    mongoose.connect('mongodb://root1:dogmeatsubparflavour1337@54.157.108.209:27017/fashionhubDB?authSource=admin',(err)=>{
         if(err){
             console.log("Mongo db not connected",err)
         }

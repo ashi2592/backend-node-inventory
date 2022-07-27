@@ -31,10 +31,7 @@ const addBrand = async (req, res, next) => {
         const reqBody = req.body;
         const value = await util.ValidateData(ValidationSchema.brandSchema, reqBody);
         if (value) {
-            let brandModelObj = new brandModel();
-            brandModelObj.brandName = reqBody.brandName;
-            brandModelObj.status = reqBody.status;
-            brandModelObj.storeId = reqBody.storeId;
+            let brandModelObj = new brandModel(reqBody);
             await brandModelObj.save()
             res.status(200).json(brandModelObj)
         }
@@ -67,7 +64,7 @@ const updateBrand = async (req, res, next) => {
 const deleteBrand = async (req, res, next) => {
     try {
         const { id,storeId } = req.params;
-        const data = await brandModel.findOneAndRemove({id,storeId})
+        const data = await brandModel.findByIdAndRemove(id)
         if (data) {
             res.status(200).json(data)
         } else {

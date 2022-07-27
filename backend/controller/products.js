@@ -1,17 +1,41 @@
 const productModel = require('../models/products');
-const { ProductAggreateQuery, barcodeSearchQuery } = require('../query/products');
+const { ProductAggreateQuery, barcodeSearchQuery, ProductAggreateQueryforSingle } = require('../query/products');
 const util = require('../util/index');
 const ValidationSchema = require('../validtors/index');
 
+const addProduct = async (req, res, next) => {
+    try {
+        const reqBody = req.body;
+        const value = await util.ValidateData(ValidationSchema.productSchema, reqBody);
+        if (value) {
+            let productModelObj = new productModel(reqBody);
+            await productModelObj.save()
+            res.status(200).json(productModelObj)
+        }
+
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
+
+
+
+
 const getProducts = async (req, res, next) => {
     try {
-        const { page, count = 10,storeId } = req.query;
+        const { page, count = 10, storeId, brand, category, type, color, size, supplier } = req.query;
+        let query = { storeId };
+        if (brand) {
+            query = { ...query, 'productBrand': util.getObjectId(brand) }
+        }
+        if (category) {
+            query = { ...query, 'productCategory': util.getObjectId(category) }
+        }
         const paginationOption = util.paginateOptions(Number(page), count);
-
-        var myAggregate = productModel.aggregate(ProductAggreateQuery(storeId));
-        // const existingdata = await productModel.paginate({}, paginationOption)
+        const productQuery = ProductAggreateQuery(query)
+        var myAggregate = productModel.aggregate(productQuery);
         const existingdata = await productModel.aggregatePaginate(myAggregate, paginationOption)
-
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -32,9 +56,10 @@ const searchProduct = async (req, res, next) => {
 
 const getProduct = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const myQuery = [...ProductAggreateQuery, ...[{ '$match': { _id: util.getObjectId(id) } }]];
-        const existingdata = await productModel.aggregate(myQuery)
+        const { id, storeId } = req.params;
+        // var myAggregate = productModel.aggregate();
+        let query = ProductAggreateQueryforSingle(util.getObjectId(id))
+        const existingdata = await productModel.aggregate(query)
         res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
     }
     catch (err) {
@@ -55,21 +80,6 @@ const getProductBybarcode = async (req, res, next) => {
     }
 }
 
-const addProduct = async (req, res, next) => {
-    try {
-        const reqBody = req.body;
-        const value = await util.ValidateData(ValidationSchema.productSchema, req.body);
-        if (value) {
-            let productModelObj = new productModel(req.body);
-            await productModelObj.save()
-            res.status(200).json(productModelObj)
-        }
-
-    }
-    catch (err) {
-        res.status(400).json({ message: err.message })
-    }
-}
 
 
 const updateProduct = async (req, res, next) => {
@@ -79,8 +89,8 @@ const updateProduct = async (req, res, next) => {
         if (value) {
             const { id } = req.params;
             const data = await productModel.findByIdAndUpdate(id, req.body)
-            const myQuery = [...[{ '$match': { _id: util.getObjectId(id) } }], ...ProductAggreateQuery];
-            const existingdata = await productModel.aggregate(myQuery)
+            let query = ProductAggreateQueryforSingle(util.getObjectId(id))
+            const existingdata = await productModel.aggregate(query)
             res.status(200).json(existingdata.length > 0 ? existingdata[0] : {})
         }
 
@@ -128,9 +138,9 @@ const getProductAvailiabity = async (req, res, next) => {
 }
 
 module.exports = {
+    addProduct,
     getProducts,
     getProduct,
-    addProduct,
     updateProduct,
     deleteProduct,
     searchProduct,

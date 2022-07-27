@@ -1,12 +1,12 @@
-const supplierModel = require('../models/suppliers');
+const patternModel = require('../models/patterns');
 const util = require('../util/index');
 const ValidationSchema = require('../validtors/index')
 
-const getSuppliers = async (req, res, next) => {
+const getPatterns = async (req, res, next) => {
     try {
         const { page, count = 10,storeId } = req.query;
         const paginationOption = util.paginateOptions(Number(page), count);
-        const existingdata = await supplierModel.paginate({storeId}, paginationOption)
+        const existingdata = await patternModel.paginate({storeId}, paginationOption)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -15,10 +15,10 @@ const getSuppliers = async (req, res, next) => {
 }
 
 
-const getSupplier = async (req, res, next) => {
+const getPattern = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const existingdata = await supplierModel.findById(id)
+        const existingdata = await patternModel.findById(id)
         res.status(200).json(existingdata)
     }
     catch (err) {
@@ -26,17 +26,15 @@ const getSupplier = async (req, res, next) => {
     }
 }
 
-const addSupplier = async (req, res, next) => {
+const addPattern = async (req, res, next) => {
     try {
         const reqBody = req.body;
-        const value = await util.ValidateData(ValidationSchema.supplierSchema, reqBody);
+        const value = await util.ValidateData(ValidationSchema.patternSchema, reqBody);
         if (value) {
-            let supplierModelObj = new supplierModel(reqBody);
-            supplierModelObj.storeId = reqBody.storeId;
-            // supplierModelObj.supplierName = reqBody.supplierName;
-            // supplierModelObj.status = reqBody.status;
-            await supplierModelObj.save()
-            res.status(200).json(supplierModelObj)
+            let patternModelObj = new patternModel(reqBody);
+            patternModelObj.storeId =reqBody.storeId;
+            await patternModelObj.save()
+            res.status(200).json(patternModelObj)
         }
 
     }
@@ -46,14 +44,14 @@ const addSupplier = async (req, res, next) => {
 }
 
 
-const updateSupplier = async (req, res, next) => {
+const updatePattern = async (req, res, next) => {
 
     try {
         const reqBody = req.body;
-        const value = await util.ValidateData(ValidationSchema.supplierSchema, reqBody);
+        const value = await util.ValidateData(ValidationSchema.patternSchema, reqBody);
         if (value) {
             const { id } = req.params;
-            const data = await supplierModel.findByIdAndUpdate(id, req.body)
+            const data = await patternModel.findByIdAndUpdate(id, req.body)
             res.status(200).json(data)
         }
 
@@ -64,10 +62,10 @@ const updateSupplier = async (req, res, next) => {
 
 }
 
-const deleteSupplier = async (req, res, next) => {
+const deletePattern = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const data = await supplierModel.findByIdAndDelete(id)
+        const data = await patternModel.findByIdAndDelete(id)
         if (data) {
             res.status(200).json(data)
         } else {
@@ -82,9 +80,9 @@ const deleteSupplier = async (req, res, next) => {
 }
 
 module.exports = {
-    getSuppliers,
-    getSupplier,
-    addSupplier,
-    updateSupplier,
-    deleteSupplier
+    getPatterns,
+    getPattern,
+    addPattern,
+    updatePattern,
+    deletePattern
 }
