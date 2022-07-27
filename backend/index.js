@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 
 try{
-    mongoose.connect('mongodb://root1:dogmeatsubparflavour1337@54.157.108.209:27017/fashionhubDB?authSource=admin',(err)=>{
+    mongoose.connect('',(err)=>{
         if(err){
             console.log("Mongo db not connected",err)
         }
